@@ -13,13 +13,13 @@ export function getBrick(index, number, space) {
   let angle = index * 2 * Math.PI / number + space;
   let angle1 = (index + 1) * 2 * Math.PI / number - space;
   let r1 = 1;
-  let r2 = 0.8;
+  let r2 = 0.95;
   let dots = [];
 
   for (let i = 0; i <= detail; i++) {
     dots.push([
-      r1 * Math.sin(lerp(angle1, angle, i / detail)),
-      r1 * Math.cos(lerp(angle1, angle, i / detail))
+      r2 * Math.sin(lerp(angle1, angle, i / detail)),
+      r2 * Math.cos(lerp(angle1, angle, i / detail))
     ]);
   }
 
