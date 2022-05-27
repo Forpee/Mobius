@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+let material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
 let geo = new THREE.BoxBufferGeometry(1, 1, 1);
 
 function lerp(a, b, t) {
@@ -13,13 +13,13 @@ export function getBrick(index, number, space) {
   let angle = index * 2 * Math.PI / number + space;
   let angle1 = (index + 1) * 2 * Math.PI / number - space;
   let r1 = 1;
-  let r2 = 0.95;
+  let r2 = 0.8;
   let dots = [];
 
   for (let i = 0; i <= detail; i++) {
     dots.push([
-      r2 * Math.sin(lerp(angle1, angle, i / detail)),
-      r2 * Math.cos(lerp(angle1, angle, i / detail))
+      r2 * Math.sin(lerp(angle, angle1, i / detail)),
+      r2 * Math.cos(lerp(angle, angle1, i / detail))
     ]);
   }
 

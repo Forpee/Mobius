@@ -82,11 +82,14 @@ window.addEventListener('resize', () => {
 });
 // Add directional light from top 
 const light = new THREE.DirectionalLight(0xffffff, 1);
+const light1 = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 1, 0);
+light1.position.set(0, 1, 0);
 scene.add(light);
+scene1.add(light1);
 // Add ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-const ambientLight1 = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight1 = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 scene1.add(ambientLight1);
 /**
