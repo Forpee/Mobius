@@ -95,7 +95,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // set renderer scissorTest to true
-renderer.setScissorTest(true);
+// renderer.setScissorTest(true);
 /**
  * Animate
  */
@@ -112,7 +112,7 @@ const tick = () => {
     material.uniforms.uTime.value = elapsedTime;
 
     // Render
-    // renderer.render(scene, camera);
+    renderer.render(scene, camera);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
