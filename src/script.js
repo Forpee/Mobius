@@ -11,7 +11,10 @@ import { getBrick } from './brick';
  */
 // Debug
 const gui = new dat.GUI();
-
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+};
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
 
@@ -38,12 +41,15 @@ const material = new THREE.ShaderMaterial({
 // Mesh
 const mesh = new THREE.Mesh(geometry, material);
 // scene.add(mesh);
-
+var frustumSize = 3;
+var aspect = 0.5 * sizes.width / sizes.height;
 let num = 15;
 let space = 0.05;
+let gr = new THREE.Group();
+scene.add(gr);
 // scene.add(getBrick(10, 15));
 for (let i = 0; i < 15; i++) {
-    scene.add(getBrick(i, 15, space));
+    gr.add(getBrick(i, 15, space));
 }
 
 let gr1 = new THREE.Group();
@@ -52,13 +58,14 @@ scene1.add(gr1);
 for (let i = 0; i < 15; i++) {
     gr1.add(getBrick(i, 15, space));
 }
+gr1.rotation.x = Math.PI / 2;
+gr1.position.y = -0.2;
+
+gr.position.x = aspect * frustumSize / 2;
+gr1.position.x = -aspect * frustumSize / 2;
 /**
  * Sizes
  */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-};
 
 window.addEventListener('resize', () => {
     // Update sizes
@@ -87,8 +94,7 @@ scene1.add(ambientLight1);
  */
 // Orthographic camera
 // const camera = new THREE.OrthographicCamera(-1/2, 1/2, 1/2, -1/2, 0.1, 100)
-var frustumSize = 3;
-var aspect = 0.5 * sizes.width / sizes.height;
+
 var camera = new THREE.OrthographicCamera(-aspect * frustumSize / 2, aspect * frustumSize / 2, frustumSize / 2, -frustumSize / 2, 0.1, 100);
 // Base camera
 // const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
@@ -120,7 +126,8 @@ const tick = () => {
 
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
-
+    gr.rotation.y = Math.PI * 2 * elapsedTime * 0.1;
+    gr1.rotation.y = Math.PI * 2 * elapsedTime * 0.1;
     // Update uniforms
     material.uniforms.uTime.value = elapsedTime;
 
