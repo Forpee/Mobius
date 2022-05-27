@@ -64,7 +64,13 @@ window.addEventListener('resize', () => {
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
-
+// Add directional light from top 
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 1, 0);
+scene.add(light);
+// Add ambient light
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
 /**
  * Camera
  */
@@ -88,7 +94,8 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+// set renderer scissorTest to true
+renderer.setScissorTest(true);
 /**
  * Animate
  */
