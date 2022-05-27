@@ -4,14 +4,14 @@ let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 let geo = new THREE.BoxBufferGeometry(1, 1, 1);
 
 function lerp(a, b, t) {
-  return a + (b - a) * t;
+  return a * (1 - t) + b * t;
 }
 
-export function getBrick(index, number) {
+export function getBrick(index, number, space) {
   // create shape
   let detail = 100;
-  let angle = index * 2 * Math.PI / number;
-  let angle1 = (index + 1) * 2 * Math.PI / number;
+  let angle = index * 2 * Math.PI / number + space;
+  let angle1 = (index + 1) * 2 * Math.PI / number - space;
   let r1 = 1;
   let r2 = 0.8;
   let dots = [];
@@ -46,6 +46,7 @@ export function getBrick(index, number) {
     depth: 0.2,
     bevelEnabled: false,
   });
+  geometry.rotateX(Math.PI / 2);
   let mesh = new THREE.Mesh(geometry, material);
   return mesh;
 }
