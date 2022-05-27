@@ -39,11 +39,19 @@ const material = new THREE.ShaderMaterial({
 const mesh = new THREE.Mesh(geometry, material);
 // scene.add(mesh);
 
+let num = 15;
+let space = 0.05;
 // scene.add(getBrick(10, 15));
 for (let i = 0; i < 15; i++) {
-    scene.add(getBrick(i, 15, 0.1));
+    scene.add(getBrick(i, 15, space));
 }
 
+let gr1 = new THREE.Group();
+scene1.add(gr1);
+
+for (let i = 0; i < 15; i++) {
+    scene.add(getBrick(i, 15, space));
+}
 /**
  * Sizes
  */
