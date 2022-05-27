@@ -50,7 +50,7 @@ let gr1 = new THREE.Group();
 scene1.add(gr1);
 
 for (let i = 0; i < 15; i++) {
-    scene.add(getBrick(i, 15, space));
+    gr1.add(getBrick(i, 15, space));
 }
 /**
  * Sizes
@@ -79,7 +79,9 @@ light.position.set(0, 1, 0);
 scene.add(light);
 // Add ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight1 = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
+scene1.add(ambientLight1);
 /**
  * Camera
  */
@@ -129,7 +131,7 @@ const tick = () => {
 
     renderer.setViewport(sizes.width / 2, 0, sizes.width / 2, sizes.height);
     renderer.setScissor(sizes.width / 2, 0, sizes.width / 2, sizes.height);
-    renderer.render(scene, camera);
+    renderer.render(scene1, camera);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
