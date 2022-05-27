@@ -112,7 +112,7 @@ const tick = () => {
     material.uniforms.uTime.value = elapsedTime;
 
     // Render
-    renderer.render(scene, camera);
+    // renderer.render(scene, camera);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
