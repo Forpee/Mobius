@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 let geo = new THREE.BoxBufferGeometry(1, 1, 1);
 
 function lerp(a, b, t) {
