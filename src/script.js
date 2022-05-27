@@ -17,6 +17,7 @@ const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene();
+const scene1 = new THREE.Scene();
 
 /**
  * Test mesh
@@ -76,10 +77,12 @@ scene.add(ambientLight);
  */
 // Orthographic camera
 // const camera = new THREE.OrthographicCamera(-1/2, 1/2, 1/2, -1/2, 0.1, 100)
-
+var frustumSize = 3;
+var aspect = 0.5 * sizes.width / sizes.height;
+var camera = new THREE.OrthographicCamera(-aspect * frustumSize / 2, aspect * frustumSize / 2, frustumSize / 2, -frustumSize / 2, 0.1, 100);
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.set(0, 0, 2);
+// const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+camera.position.set(0, 2, 2);
 scene.add(camera);
 
 // Controls
@@ -112,7 +115,13 @@ const tick = () => {
     material.uniforms.uTime.value = elapsedTime;
 
     // Render
-    // renderer.render(scene, camera);
+    renderer.setViewport(0, 0, sizes.width / 2, sizes.height);
+    renderer.setScissor(0, 0, sizes.width / 2, sizes.height);
+    renderer.render(scene, camera);
+
+    renderer.setViewport(sizes.width / 2, 0, sizes.width / 2, sizes.height);
+    renderer.setScissor(sizes.width / 2, 0, sizes.width / 2, sizes.height);
+    renderer.render(scene, camera);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
